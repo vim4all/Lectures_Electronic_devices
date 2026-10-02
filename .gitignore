@@ -4,3 +4,4 @@ temp/
 .claude/
 *.pyc
 .DS_Store
+*.doc
