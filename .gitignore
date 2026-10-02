@@ -5,3 +5,4 @@ temp/
 *.pyc
 .DS_Store
 *.doc
+tools/build/imgs/
