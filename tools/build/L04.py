@@ -113,14 +113,15 @@ if SCHEMDRAW_AVAILABLE:
         for xc, lab_up, lab_dn in [(X, 'VD1', 'VD3'), (X + W, 'VD2', 'VD4')]:
             d.add(elm.Diode().endpoints((xc, 1.5), (xc, 4)).label(lab_up, loc='bottom'))     # анод — середина, катод — «+»
             d.add(elm.Diode().endpoints((xc, -1), (xc, 1.5)).label(lab_dn, loc='bottom'))    # анод — «−», катод — середина
-            d.add(elm.Dot().at((xc, 1.5))); d.add(elm.Dot().at((xc, 4))); d.add(elm.Dot().at((xc, -1)))
-        d.add(elm.SourceSin().endpoints((X, 1.5), (X + W, 1.5)))
+            d.add(elm.Dot().at((xc, 1.5)))
+            if xc != X: d.add(elm.Dot().at((xc, 4))); d.add(elm.Dot().at((xc, -1)))   # кути лівої гілки — без точок
+        d.add(SourceSinH().endpoints((X, 1.5), (X + W, 1.5)))
         d.add(elm.Label().at((X + W/2, 2.35)).label('$u_2$'))
         d.add(elm.Capacitor().endpoints((X + W + 2, 4), (X + W + 2, -1)).label('C', loc='bottom'))
         d.add(elm.Dot().at((X + W + 2, 4))); d.add(elm.Dot().at((X + W + 2, -1)))
         d.add(elm.Line().endpoints((X + W + 2, 4), (X + W + 4, 4))); d.add(elm.Line().endpoints((X + W + 2, -1), (X + W + 4, -1)))
         d.add(elm.Resistor().endpoints((X + W + 4, 4), (X + W + 4, -1)).label('$R_н$', loc='bottom'))
-        d.add(elm.Label().at((X + W + 4.7, 4)).label('+')); d.add(elm.Label().at((X + W + 4.7, -1)).label('−'))
+        d.add(elm.Label().at((X + W + 4.6, 3.5)).label('+', fontsize=14)); d.add(elm.Label().at((X + W + 4.6, -0.5)).label('−', fontsize=14))
         d.add(elm.Label().at((X + 4.5, 5.3)).label('(б) мостовий (схема Греца)'))
 ''')
 nb.md(f'''
@@ -205,6 +206,8 @@ if SCHEMDRAW_AVAILABLE:
             d.add(elm.Resistor().endpoints((x0, -0.2), (x0 + 3.0, -0.2)).label(f'$R_{{ш{k+1}}}$', loc='bottom'))
             d.add(elm.Line().endpoints((x0, -0.2), (x0, -1.6))); d.add(elm.Line().endpoints((x0 + 3.0, -0.2), (x0 + 3.0, -1.6)))
             d.add(elm.Capacitor().endpoints((x0, -1.6), (x0 + 3.0, -1.6)).label(f'$C_{{ш{k+1}}}$', loc='bottom'))
+            d.add(elm.Dot().at((x0, -0.2))); d.add(elm.Dot().at((x0 + 3.0, -0.2)))
+            if k: d.add(elm.Dot().at((x0, -1.6)))
         d.add(elm.Line().endpoints((X - 1, 1), (X, 1))); d.add(elm.Line().endpoints((X + 9, 1), (X + 10, 1)))
         d.add(elm.Label().at((X + 4.5, 2.3)).label('(б) послідовне: шунтувальні R і C'))
 ''')
@@ -376,7 +379,7 @@ def zener_reg(Rb=100, R_load=470, E_nom=12.0):
     an = c.simulator().dc(Ve=slice(0, 20, 0.05))
     E = np.array(an.sweep); Uo = np.array(an['o'])
     Iz = (E - Uo)/Rb - Uo/R_load
-    Rn_list = np.linspace(20, 2000, 100); Uo_n = []
+    Rn_list = np.geomspace(15, 5000, 150); Uo_n = []
     for Rn in Rn_list:
         Uo_n.append(float(op(E_nom, Rn).simulator().operating_point()['o'][0]))
     Uo_n = np.array(Uo_n)
@@ -387,7 +390,7 @@ def zener_reg(Rb=100, R_load=470, E_nom=12.0):
     axes[1].plot(E, Iz*1e3, color='#dc2626'); axes[1].axhline(5, color='gray', ls=':', lw=1)
     axes[1].axhline(1000/5.6, color='r', ls='--', lw=1); axes[1].text(0.5, 1000/5.6 + 5, '$I_{ст.max}$ = P/U = 178 мА', fontsize=8, color='r')
     axes[1].text(0.5, 8, '$I_{ст.min}$ ≈ 5 мА', fontsize=8, color='gray')
-    axes[1].set_xlabel('E, В'); axes[1].set_ylabel('$I_{ст}$, мА'); axes[1].set_title('Струм стабілітрона')
+    axes[1].set_xlabel('E, В'); axes[1].set_ylabel('$I_{ст}$, мА'); axes[1].set_title('Струм стабілітрона'); axes[1].set_ylim(-5, 200)
     axes[2].plot(Uo_n/Rn_list*1e3, Uo_n, color='#16a34a')
     axes[2].set_xlabel('$I_н$, мА'); axes[2].set_ylabel('$U_{вих}$, В'); axes[2].set_title(f'Навантажувальна характеристика (E = {E_nom} В)')
     axes[2].set_ylim(0, 7)

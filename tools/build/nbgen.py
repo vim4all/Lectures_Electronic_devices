@@ -3,8 +3,8 @@ import os, re, json, base64, sys, textwrap
 import nbformat
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 
-REPO = '/mnt/d/Pr/_University/Teaching/3_ElectronicDevices/ElDev_repo'
 SCRATCH = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(SCRATCH))          # корінь репозиторію (tools/build/ → ../..)
 
 LECTURES = [
     ('01', 'Фізичні_основи_напівпровідників', 'Фізичні основи напівпровідників'),
@@ -407,6 +407,41 @@ if SCHEMDRAW_AVAILABLE:
             super().__init__(**kwargs)
             self.segments.append(Segment([(jfetw + .05, -fetl - jfetw), (jfetw + .35, -fetl - jfetw)],
                                          arrow='->', arrowwidth=.2, arrowlength=.25))
+
+    class SourceSinH(elm.Source):
+        """Джерело змінної напруги для горизонтального розміщення: синусоїда всередині кола залишається горизонтальною."""
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            ph = np.linspace(-np.pi, np.pi, 41)
+            self.segments.append(Segment(list(zip(0.5 + ph/np.pi*0.3, 0.18*np.sin(ph)))))
+
+    class Dinistor(elm.Diode):
+        """Диністор (діодний тиристор, IEC 60617): діод, катодна риска якого має відгин до анода."""
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.segments.append(Segment([(0.35, -0.25), (0.1, -0.25)]))
+
+    class Mosfet(elm.Element):
+        """МДН-транзистор за ДСТУ: затвор ліворуч, стік угорі, витік унизу, підкладка з'єднана з витоком.
+        depletion=False — індукований канал (лінія каналу з трьох відрізків), True — вбудований (суцільна).
+        Стрілка підкладки: до каналу для n-типу, від каналу — для p-типу. Виводи: gate, drain, source."""
+        def __init__(self, ptype=False, depletion=False, **kwargs):
+            super().__init__(**kwargs)
+            xg, xc, xo = 0.7, 0.9, 1.5
+            self.segments.append(Segment([(0, 0), (xg, 0)]))                       # вивід затвора
+            self.segments.append(Segment([(xg, -0.55), (xg, 0.55)]))               # затвор
+            if depletion:
+                self.segments.append(Segment([(xc, -0.65), (xc, 0.65)]))
+            else:
+                for y0 in (0.35, -0.15, -0.65):
+                    self.segments.append(Segment([(xc, y0), (xc, y0 + 0.3)]))
+            self.segments.append(Segment([(xc, 0.5), (xo, 0.5), (xo, 1.1)]))       # стік
+            self.segments.append(Segment([(xc, -0.5), (xo, -0.5), (xo, -1.1)]))    # витік
+            self.segments.append(Segment([(xo, 0), (xo, -0.5)]))                   # підкладка — до витоку
+            path = [(xc + 0.05, 0), (xo, 0)] if ptype else [(xo, 0), (xc + 0.05, 0)]
+            self.segments.append(Segment(path, arrow='->', arrowwidth=.2, arrowlength=.25))
+            self.anchors.update(gate=(0, 0), drain=(xo, 1.1), source=(xo, -1.1), center=(xc, 0))
+            self.params['drop'] = (xo, -1.1)
 
 # Фізичні сталі
 q = 1.602176634e-19      # Кл, елементарний заряд

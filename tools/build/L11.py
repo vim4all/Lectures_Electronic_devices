@@ -108,32 +108,35 @@ for k, xj in enumerate(xs, 1):
     ax.text(xj, 1.9, f'J{k}', ha='center', fontsize=12)
 ax.annotate('Анод (А)', xy=(0, 0.8), xytext=(-1.6, 0.8), va='center', arrowprops=dict(arrowstyle='-'), fontsize=11)
 ax.annotate('Катод (К)', xy=(x, 0.8), xytext=(x + 0.6, 0.8), va='center', arrowprops=dict(arrowstyle='-'), fontsize=11)
-ax.annotate('Керуючий\nелектрод (КЕ)', xy=(xs[1] + 0.6, 0), xytext=(xs[1] + 0.1, -1.0), ha='center', arrowprops=dict(arrowstyle='-'), fontsize=10)
-ax.text(xs[1], -0.55, 'J2 зміщений зворотно\n(тримає напругу)', ha='center', fontsize=9, color='#b91c1c')
+xg = xs[1] + 0.6                                         # вивід КЕ від бази p2
+ax.plot([xg, xg], [0, -0.75], 'k-', lw=1.5); ax.plot(xg, -0.75, 'o', mfc='white', mec='k', ms=7)
+ax.text(xg + 0.15, -0.85, 'КЕ (керуючий електрод)', fontsize=10, va='center')
+ax.annotate('J2 зміщений зворотно\n(тримає всю напругу)', xy=(xs[1], 0.25), xytext=(xs[1] - 1.9, -0.75), ha='center', va='center',
+            fontsize=9, color='#b91c1c', arrowprops=dict(arrowstyle='->', color='#b91c1c'))
 ax.set_xlim(-2, x + 2.4); ax.set_ylim(-1.3, 2.3); ax.axis('off')
 ax.set_title('Структура p-n-p-n тиристора при прямій напрузі $U_{АК}>0$')
 plt.show()
 
 if SCHEMDRAW_AVAILABLE:
     with schemdraw.Drawing(fontsize=11, unit=2.5) as d:
-        qp = d.add(elm.BjtPnp(circle=True).right().reverse().anchor('base').at((2.0, 0)).label('VT1 p-n-p\n(p1-n1-p2)', loc='right'))
-        qn = d.add(elm.BjtNpn(circle=True).right().anchor('base').at((0.0, -3.0)).label('VT2 n-p-n\n(n2-p2-n1)', loc='right'))
-        xe, ye = qp.emitter; xc, yc = qp.collector
-        d.add(elm.Line().endpoints((xe, ye), (xe, ye + 0.8))); d.add(elm.Dot(open=True).at((xe, ye + 0.8)))
-        d.add(elm.Label().at((xe + 0.35, ye + 0.85)).label('А'))
-        # колектор VT1 -> база VT2 (струм α1·I_А живить базу n-p-n)
-        d.add(elm.Line().endpoints((xc, yc), (xc, -1.8))); d.add(elm.Line().endpoints((xc, -1.8), (-0.6, -1.8)))
-        d.add(elm.Line().endpoints((-0.6, -1.8), (-0.6, -3.0))); d.add(elm.Line().endpoints((-0.6, -3.0), (0.0, -3.0)))
-        d.add(elm.Dot().at((-0.6, -3.0)))
-        d.add(elm.Line().endpoints((-0.6, -3.0), (-1.8, -3.0))); d.add(elm.Dot(open=True).at((-1.8, -3.0)))
-        d.add(elm.Label().at((-1.8, -2.6)).label('КЕ'))
-        # колектор VT2 -> база VT1
-        xn, yn = qn.collector
-        d.add(elm.Line().endpoints((xn, yn), (xn, -1.2))); d.add(elm.Line().endpoints((xn, -1.2), (2.6, -1.2)))
-        d.add(elm.Line().endpoints((2.6, -1.2), (2.6, 0.0))); d.add(elm.Line().endpoints((2.6, 0.0), (2.0, 0.0)))
+        qp = d.add(elm.BjtPnp(circle=True).reverse().theta(0).anchor('base').at((1.0, 0)))     # база праворуч
+        qn = d.add(elm.BjtNpn(circle=True).theta(0).anchor('base').at((2.6, -2.6)))            # база ліворуч
+        d.add(elm.Label().at((qp.center[0] - 1.3, qp.center[1])).label('VT1\np-n-p\n(p1-n1-p2)', fontsize=10))
+        d.add(elm.Label().at((qn.center[0] + 1.3, qn.center[1])).label('VT2\nn-p-n\n(n2-p2-n1)', fontsize=10))
+        xe, ye = qp.emitter
+        d.add(elm.Line().endpoints((xe, ye), (xe, ye + 0.7))); d.add(elm.Dot(open=True).at((xe, ye + 0.7)).label('А', loc='right'))
+        # колектор VT1 (p2) -> база VT2: струм α1·I_А живить базу n-p-n
+        xc, yc = qp.collector; xb2, yb2 = qn.base
+        d.add(elm.Line().endpoints((xc, yc), (xc, yb2))); d.add(elm.Line().endpoints((xc, yb2), (xb2, yb2)))
+        # колектор VT2 (n1) -> база VT1
+        xn, yn = qn.collector; xb1, yb1 = qp.base
+        d.add(elm.Line().endpoints((xn, yn), (xn, yb1))); d.add(elm.Line().endpoints((xn, yb1), (xb1, yb1)))
+        # керуючий електрод — від бази VT2 (шар p2)
+        xg = (xc + xb2)/2
+        d.add(elm.Dot().at((xg, yb2))); d.add(elm.Line().endpoints((xg, yb2), (xg, yb2 - 1.4)))
+        d.add(elm.Dot(open=True).at((xg, yb2 - 1.4)).label('КЕ', loc='left'))
         xk, yk = qn.emitter
-        d.add(elm.Line().endpoints((xk, yk), (xk, yk - 0.8))); d.add(elm.Dot(open=True).at((xk, yk - 0.8)))
-        d.add(elm.Label().at((xk + 0.35, yk - 0.85)).label('К'))
+        d.add(elm.Line().endpoints((xk, yk), (xk, yk - 0.7))); d.add(elm.Dot(open=True).at((xk, yk - 0.7)).label('К', loc='right'))
 ''')
 nb.md(f'''
 {nb.section('🔬 Інтерактивно: S-подібна ВАХ з двотранзисторної моделі', 'iv-model', 3)}
@@ -218,7 +221,7 @@ if SCHEMDRAW_AVAILABLE:
         d.add(elm.Dot().at((3, 3)))
         d.add(elm.Capacitor().endpoints((3, 3), (3, 0)).label('C', loc='bottom'))
         d.add(elm.Line().endpoints((3, 3), (5.5, 3)))
-        d.add(elm.Diode().endpoints((5.5, 3), (5.5, 1.5)).label('VS1\n(диністор)', loc='bottom'))
+        d.add(Dinistor().endpoints((5.5, 3), (5.5, 1.5)).label('VS1\n(диністор)', loc='bottom'))
         d.add(elm.Resistor().endpoints((5.5, 1.5), (5.5, 0)).label('$R_н$', loc='bottom'))
         d.add(elm.Line().endpoints((5.5, 0), (0, 0))); d.add(elm.Dot().at((3, 0)))
 ''')

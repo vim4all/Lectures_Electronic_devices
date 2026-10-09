@@ -322,10 +322,10 @@ if SCHEMDRAW_AVAILABLE:
     with schemdraw.Drawing(fontsize=10, unit=2) as d:
         def stage(x0, kind, title):
             top = 5.0
-            d.add(elm.Line().endpoints((x0, top), (x0 + 4, top)))
             d.add(elm.Label().at((x0 + 2, top + 0.6)).label(title, fontsize=10))
             t = d.add(elm.BjtNpn(circle=True).at((x0 + 2.2, 1.6)).theta(0))
-            d.add(elm.Resistor().endpoints((t.collector[0], top), t.collector).label('$R_к$'))
+            d.add(elm.Line().endpoints((x0 + 0.6 if kind != 2 else t.collector[0] - 0.8, top), (x0 + 4, top)))
+            d.add(elm.Resistor().endpoints((t.collector[0], top), t.collector).label('$R_к$')); d.add(elm.Dot().at((t.collector[0], top)))
             if kind == 1:
                 d.add(elm.Resistor().endpoints((x0 + 0.6, top), (x0 + 0.6, t.base[1])).label('$R_б$', loc='bottom'))
                 d.add(elm.Line().endpoints((x0 + 0.6, t.base[1]), t.base))

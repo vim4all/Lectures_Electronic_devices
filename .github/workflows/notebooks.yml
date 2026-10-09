@@ -1,0 +1,25 @@
+name: Check notebooks
+
+on:
+  push:
+    paths: ["**.ipynb", "models/**", "requirements.txt", "apt.txt", "tools/**", ".github/workflows/notebooks.yml"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install ngspice
+        run: sudo apt-get update && sudo apt-get install -y $(cat apt.txt)
+      - name: Install Python packages
+        run: pip install -r requirements.txt nbclient nbformat ipykernel
+      - name: Check links and execute notebooks
+        env:
+          MPLBACKEND: Agg
+        run: python tools/check_notebooks.py

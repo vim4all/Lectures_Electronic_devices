@@ -163,7 +163,9 @@ if SCHEMDRAW_AVAILABLE:
         t = d.add(elm.BjtNpn(circle=True).at((4.2, 1.6)).theta(0))
         yb = t.base[1]                                          # рівень бази — вузол дільника і вхідне коло
         d.add(elm.Line().endpoints((1.5, top), (10.0, top))); d.add(elm.Label().at((9.6, top + 0.45)).label('$+E_к$ = 12 В'))
-        d.add(elm.Line().endpoints((-1.5, bot), (10.0, bot))); d.add(elm.Ground().at((5, bot)))
+        d.add(elm.Line().endpoints((-1.5, bot), (8.6, bot))); d.add(elm.Ground().at((t.emitter[0], bot)))
+        for xj in (1.5, t.emitter[0], 6.6): d.add(elm.Dot().at((xj, bot)))
+        d.add(elm.Dot().at((t.collector[0], top)))
         d.add(elm.SourceSin().endpoints((-1.5, bot), (-1.5, yb))); d.add(elm.Label().at((-2.4, (bot + yb)/2)).label('$e_г$'))
         d.add(elm.Resistor().endpoints((-1.5, yb), (0.3, yb)).label('$R_г$'))
         d.add(elm.Capacitor().endpoints((0.3, yb), (1.5, yb)).label('$C_1$'))
@@ -314,18 +316,20 @@ nb.md(f'''
 nb.code(r'''
 if SCHEMDRAW_AVAILABLE:
     with schemdraw.Drawing(fontsize=11, unit=2.2) as d:
-        d.add(elm.SourcePulse().endpoints((0, -1), (0, 1.8))); d.add(elm.Label().at((-1.0, 0.4)).label('$u_{вх}$'))
-        d.add(elm.Resistor().endpoints((0, 1.8), (2.5, 1.8)).label('$R_б$'))
-        t = d.add(elm.BjtNpn(circle=True).at((3.8, 1.1)).theta(0))
-        d.add(elm.Line().endpoints((2.5, 1.8), t.base)); d.add(elm.Dot().at((2.5, 1.8)))
-        d.add(elm.Resistor().endpoints((t.collector[0], 5.2), t.collector).label('$R_к$ 1 кОм'))
-        d.add(elm.Dot().at((t.collector[0], 3.2)))
-        d.add(elm.Line().endpoints((2.5, 1.8), (2.5, 3.2)))
-        d.add(elm.Schottky().endpoints((2.5, 3.2), (t.collector[0], 3.2)).label('VD1 BAT54\n(ключ Шотки)', fontsize=9))
-        d.add(elm.Line().endpoints((t.collector[0], 3.2), (6.5, 3.2))); d.add(elm.Dot(open=True).at((6.5, 3.2)).label('$u_{вих}$', loc='right'))
-        d.add(elm.Line().endpoints((t.collector[0] - 1.0, 5.2), (t.collector[0] + 1.0, 5.2))); d.add(elm.Label().at((t.collector[0] + 1.6, 5.2)).label('+10 В'))
-        d.add(elm.Line().endpoints(t.emitter, (t.emitter[0], -1))); d.add(elm.Line().endpoints((0, -1), (t.emitter[0], -1)))
-        d.add(elm.Ground().at((t.emitter[0], -1)))
+        t = d.add(elm.BjtNpn(circle=True).at((4.2, 1.2)).theta(0))
+        xb, yb = t.base; xc = t.collector[0]; yd = t.collector[1] + 1.0; yg = -0.6
+        d.add(elm.SourcePulse().endpoints((0, yg), (0, yb))); d.add(elm.Label().at((-0.9, (yg + yb)/2)).label('$u_{вх}$'))
+        d.add(elm.Resistor().endpoints((0, yb), (2.4, yb)).label('$R_б$'))
+        d.add(elm.Line().endpoints((2.4, yb), t.base)); d.add(elm.Dot().at((2.4, yb)))
+        d.add(elm.Line().endpoints((2.4, yb), (2.4, yd)))
+        d.add(elm.Schottky().endpoints((2.4, yd), (xc, yd)).label('VD1 BAT54', loc='top', fontsize=10))
+        d.add(elm.Line().endpoints(t.collector, (xc, yd))); d.add(elm.Dot().at((xc, yd)))
+        d.add(elm.Resistor().endpoints((xc, yd), (xc, yd + 2.2)).label('$R_к$ 1 кОм', loc='bottom'))
+        d.add(elm.Line().endpoints((xc - 0.8, yd + 2.2), (xc + 0.8, yd + 2.2))); d.add(elm.Label().at((xc + 1.5, yd + 2.2)).label('+10 В'))
+        d.add(elm.Line().endpoints((xc, yd), (xc + 2.4, yd))); d.add(elm.Dot(open=True).at((xc + 2.4, yd)).label('$u_{вих}$', loc='right'))
+        d.add(elm.Line().endpoints(t.emitter, (t.emitter[0], yg))); d.add(elm.Line().endpoints((0, yg), (t.emitter[0], yg)))
+        d.add(elm.Ground().at((t.emitter[0], yg)))
+        d.add(elm.Label().at((t.center[0] + 1.1, t.center[1])).label('VT1', fontsize=10))
 ''')
 nb.code(r'''
 def bjt_switch(Rb_kOhm=4.7, schottky=False):

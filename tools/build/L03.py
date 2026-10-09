@@ -217,7 +217,7 @@ ax.semilogy(Ur, Igen, color='#7c3aed', lw=1.5, ls=':', label='струм ген�
 ax.semilogy(Ur, (Is + Igen)*M, color='#dc2626', lw=2.5, label='повний струм з лавинним множенням')
 ax.axvline(UBR, color='gray', ls=':'); ax.text(UBR - 0.5, 1e-12, '$U_{проб}$', ha='right', color='gray')
 ax.set_xlabel('Зворотна напруга |U|, В'); ax.set_ylabel('Зворотний струм |I|, А')
-ax.set_title('Зворотна гілка кремнієвого діода (розрахунок)'); ax.legend(fontsize=9, loc='center left')
+ax.set_title('Зворотна гілка кремнієвого діода (розрахунок)'); ax.legend(fontsize=9, loc='upper left')
 ax.set_ylim(1e-14, 1e-4); ax.grid(True, which='both', alpha=0.3)
 plt.tight_layout(); plt.show()
 print(f'I_S = {Is:.2e} A;  I_ген(U=0) = {Igen[0]:.2e} A;  I_ген(50 В) = {Igen[np.argmin(abs(Ur-50))]:.2e} A;'

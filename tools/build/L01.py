@@ -502,6 +502,7 @@ def plot_rev(Tmax=423):
         ax.semilogy(T_list - 273, theory, '-', color=MATERIALS[name]['color'], lw=1.3)
     ax.set_xlabel('Температура, °C'); ax.set_ylabel('$I_{зв}(T)\\,/\\,I_{зв}(300\\,К)$')
     ax.set_title('Зворотний струм переходу: ngspice (точки) і $n_i^2(T)$ (лінії)')
+    ax.plot([], [], '-', color='gray', lw=1.3, label='теорія: $n_i^2(T)/n_i^2(300\\,К)$')
     ax.legend(fontsize=9); plt.tight_layout(); plt.show()
     Eg = 1.11
     print(f'Si: зростання струму від 25 до 35 °C — у {np.exp(-Eg/kB_eV*(1/308.15-1/298.15))*(308.15/298.15)**3:.2f} раза'

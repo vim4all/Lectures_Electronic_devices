@@ -186,23 +186,16 @@ nb.md(f'''
 ''')
 nb.code(r'''
 if SCHEMDRAW_AVAILABLE:
-    class DepletionMos(elm.NFet):
-        """МДН зі вбудованим каналом (суцільна лінія каналу); для p-каналу стрілка підкладки — від каналу."""
-        _element_defaults = {**elm.NFet._element_defaults, 'bulk': True}   # вивід підкладки зі стрілкою
-        def __init__(self, pchannel=False, **kw):
-            super().__init__(**kw)
-            if pchannel:
-                for seg in self.segments:
-                    if getattr(seg, 'arrow', None): seg.path = list(seg.path)[::-1]
     with schemdraw.Drawing(fontsize=11, unit=2) as d:
-        items = [(elm.NMos(), 'n-канал, індукований'), (elm.PMos(), 'p-канал, індукований'),
-                 (DepletionMos().reverse(), 'n-канал, вбудований'), (DepletionMos(pchannel=True).reverse(), 'p-канал, вбудований')]
+        items = [(Mosfet(), 'n-канал, індукований'), (Mosfet(ptype=True), 'p-канал, індукований'),
+                 (Mosfet(depletion=True), 'n-канал, вбудований'), (Mosfet(ptype=True, depletion=True), 'p-канал, вбудований')]
         for k, (E, name) in enumerate(items):
-            t = d.add(E.at((k*5.0, 0)).theta(0))
-            for a_, lab in [('gate', 'З'), ('drain', 'С'), ('source', 'В')]:
-                xa, ya = t.absanchors[a_]
-                d.add(elm.Label().at((xa + (-0.35 if a_ == 'gate' else 0.35), ya)).label(lab))
-            d.add(elm.Label().at((k*5.0 + 0.3, -2.4)).label(name, fontsize=10))
+            t = d.add(E.at((k*4.0, 0)).theta(0))
+            d.add(elm.Line().endpoints(t.gate, (t.gate[0] - 0.6, t.gate[1])))
+            d.add(elm.Label().at((t.gate[0] - 0.85, t.gate[1])).label('З'))
+            d.add(elm.Label().at((t.drain[0] + 0.3, t.drain[1] - 0.15)).label('С'))
+            d.add(elm.Label().at((t.source[0] + 0.3, t.source[1] + 0.15)).label('В'))
+            d.add(elm.Label().at((k*4.0 + 0.75, -1.8)).label(name, fontsize=10))
 ''')
 nb.code(r'''
 # Передавальні характеристики чотирьох типів МДН-транзисторів (насичення, квадратичний закон)
@@ -250,8 +243,9 @@ for Ugs in [3.0, 3.5, 4.0, 4.5, 5.0]:
     an = c.simulator().dc(Vds=slice(0, 6, 0.01))
     U, I = np.array(an.sweep), -np.array(an.branches['vds'])
     axes[0].plot(U, I*1e3, color='#2563eb', lw=2); axes[0].text(6.1, I[-1]*1e3, f'{Ugs} В', va='center', fontsize=9)
-u = np.linspace(0, 6, 100); axes[0].plot(u, 0.296/2*u**2*1e3, 'r--', lw=1.2, label='межа насичення $U_{СВ} = U_{ЗВ} - U_{пор}$ (без $R_S$)')
-axes[0].set_xlim(0, 6.8); axes[0].set_ylim(0, 450); axes[0].set_xlabel('$U_{СВ}$, В'); axes[0].set_ylabel('$I_С$, мА')
+Ib = np.linspace(0, 0.6, 200)                    # межа насичення: U_СВ = (U_ЗВ − U_пор) внутр. транзистора + I·R_S
+axes[0].plot(np.sqrt(2*Ib/0.296) + Ib*1.68, Ib*1e3, 'r--', lw=1.2, label='межа насичення $U_{СВ} = U_{ЗВ}^{внутр} - U_{пор} + I_С R_S$')
+axes[0].set_xlim(0, 6.8); axes[0].set_ylim(0, 560); axes[0].set_xlabel('$U_{СВ}$, В'); axes[0].set_ylabel('$I_С$, мА')
 axes[0].set_title('Вихідні характеристики 2N7000 ($U_{ЗВ}$ — параметр)'); axes[0].legend(fontsize=9, loc='upper left')
 c['Vds'].dc_value = 10
 an = c.simulator().dc(Vgs=slice(0, 5, 0.01)); Ug, Id = np.array(an.sweep), -np.array(an.branches['vds'])
@@ -353,8 +347,8 @@ nb.md(f'''
 nb.code(r'''
 if SCHEMDRAW_AVAILABLE:
     with schemdraw.Drawing(fontsize=11, unit=2) as d:
-        tp = d.add(elm.PMos().at((2, 3.4)).theta(0))                 # затвор ліворуч, витік угорі, стік унизу
-        tn = d.add(elm.NMos().at((2, 0)).theta(0))                   # затвор ліворуч, стік угорі, витік унизу
+        tp = d.add(Mosfet(ptype=True).flip().at((2, 3.0)).theta(0))          # затвор ліворуч, витік угорі, стік унизу
+        tn = d.add(Mosfet().at((2, 0)).theta(0))                              # затвор ліворуч, стік угорі, витік унизу
         d.add(elm.Line().endpoints(tp.drain, tn.drain))
         d.add(elm.Line().endpoints(tp.source, (tp.source[0], tp.source[1] + 0.5))); d.add(elm.Vdd().at((tp.source[0], tp.source[1] + 0.5)).label('$U_{DD}$'))
         d.add(elm.Line().endpoints(tn.source, (tn.source[0], tn.source[1] - 0.5))); d.add(elm.Ground().at((tn.source[0], tn.source[1] - 0.5)))
@@ -366,8 +360,8 @@ if SCHEMDRAW_AVAILABLE:
         yo = (tp.drain[1] + tn.drain[1])/2
         d.add(elm.Dot().at((tp.drain[0], yo))); d.add(elm.Line().endpoints((tp.drain[0], yo), (tp.drain[0] + 1.5, yo)))
         d.add(elm.Dot(open=True).at((tp.drain[0] + 1.5, yo)).label('$U_{вих}$', loc='right'))
-        d.add(elm.Label().at((tp.drain[0] + 1.0, tp.center[1])).label('VT1 (p)', fontsize=10))
-        d.add(elm.Label().at((tn.drain[0] + 1.0, tn.center[1])).label('VT2 (n)', fontsize=10))
+        d.add(elm.Label().at((tp.drain[0] + 0.9, tp.center[1])).label('VT1 (p)', fontsize=10))
+        d.add(elm.Label().at((tn.drain[0] + 0.9, tn.center[1])).label('VT2 (n)', fontsize=10))
 ''')
 nb.md(f'''
 {nb.section('⚙️ PySpice: передавальна характеристика і струм споживання', 'spice-cmos', 3)}
@@ -384,15 +378,16 @@ def cmos(Udd=3.3, Wp_over_Wn=2.5):
     sim = c.simulator(); sim.options(gmin=1e-20)
     an = sim.dc(Vin=slice(0, Udd, Udd/400))
     Uin, Uout = np.array(an.sweep), np.array(an['out']); Idd = -np.array(an.branches['vdd'])
-    k = np.argmin(abs(Uout - Uin)); gain = -np.gradient(Uout, Uin).max()
+    dU = Uout - Uin; k = np.where(np.diff(np.sign(dU)))[0][0]           # точка перетину з прямою U_вих = U_вх
+    UM = Uin[k] - dU[k]*(Uin[k + 1] - Uin[k])/(dU[k + 1] - dU[k]); gain = -np.gradient(Uout, Uin).max()
     fig, axes = plt.subplots(1, 2, figsize=(14, 4.6))
     axes[0].plot(Uin, Uout, color='#7c3aed', lw=2.5); axes[0].plot([0, Udd], [0, Udd], ':', color='gray')
-    axes[0].plot(Uin[k], Uout[k], 'ro'); axes[0].text(Uin[k] + 0.05, Uout[k] + 0.1, f'$U_M$ = {Uin[k]:.2f} В')
+    axes[0].plot(UM, UM, 'ro', zorder=5); axes[0].text(UM + 0.08, UM + 0.1, f'$U_M$ = {UM:.2f} В')
     axes[0].set_xlabel('$U_{вх}$, В'); axes[0].set_ylabel('$U_{вих}$, В'); axes[0].set_title(f'Передавальна характеристика, $U_{{DD}}$ = {Udd} В')
     axes[1].semilogy(Uin, np.clip(Idd, 1e-15, None), color='#dc2626', lw=2)
     axes[1].set_xlabel('$U_{вх}$, В'); axes[1].set_ylabel('$I_{DD}$, А'); axes[1].set_title('Струм споживання (наскрізний)'); axes[1].grid(True, which='both', alpha=0.3)
     plt.tight_layout(); plt.show()
-    print(f'Поріг перемикання U_M = {Uin[k]:.2f} В (U_DD/2 = {Udd/2:.2f} В);  максимальне підсилення |dU_вих/dU_вх| = {gain:.0f}')
+    print(f'Поріг перемикання U_M = {UM:.2f} В (U_DD/2 = {Udd/2:.2f} В);  максимальне підсилення |dU_вих/dU_вх| = {gain:.0f}')
     print(f'Струм у статичних станах: {Idd[0]:.1e} А (вхід 0) і {Idd[-1]:.1e} А (вхід U_DD);  піковий наскрізний струм {Idd.max()*1e6:.0f} мкА')
 
 interact(cmos, Udd=widgets.FloatSlider(min=1.2, max=5, step=0.1, value=3.3, description='$U_{DD}$, В', continuous_update=False),

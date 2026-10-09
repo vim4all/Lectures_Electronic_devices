@@ -272,8 +272,10 @@ if SCHEMDRAW_AVAILABLE:
     with schemdraw.Drawing(fontsize=11, unit=2.2) as d:
         top, bot = 5.5, -1.5
         t = d.add(JFetNch(circle=True).at((4.2, 2.6)).theta(0).reverse())
-        d.add(elm.Line().endpoints((0, top), (8.5, top))); d.add(elm.Label().at((8.0, top + 0.45)).label('$+E_С$ = 15 В'))
-        d.add(elm.Line().endpoints((-1.2, bot), (8.5, bot))); d.add(elm.Ground().at((4.5, bot)))
+        d.add(elm.Line().endpoints((t.drain[0] - 1.0, top), (8.5, top))); d.add(elm.Label().at((8.0, top + 0.45)).label('$+E_С$ = 15 В'))
+        d.add(elm.Dot().at((t.drain[0], top)))
+        d.add(elm.Line().endpoints((-1.2, bot), (5.8, bot))); d.add(elm.Ground().at((t.source[0], bot)))
+        for xj in (1.3, t.source[0]): d.add(elm.Dot().at((xj, bot)))
         d.add(elm.SourceSin().endpoints((-1.2, bot), (-1.2, t.gate[1]))); d.add(elm.Label().at((-2.0, 0.6)).label('$e_г$'))
         d.add(elm.Capacitor().endpoints((-1.2, t.gate[1]), (1.3, t.gate[1])).label('$C_1$'))
         d.add(elm.Dot().at((1.3, t.gate[1])))

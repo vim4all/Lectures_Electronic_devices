@@ -302,8 +302,9 @@ def cv_plot(diode='MV2201 (варикап)', forward=False):
     ax.grid(True, which='both', alpha=0.3)
     import matplotlib.ticker as mticker
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f'{v:g}'))
-    few_decades = C.max()/C.min() < 30
-    ax.yaxis.set_minor_formatter(mticker.FuncFormatter(lambda v, _: f'{v:g}' if few_decades else ''))
+    if C.max()/C.min() < 30:                         # мало декад — підписуємо проміжні значення 1, 1,5, 2, 3, 5, 7
+        ax.yaxis.set_major_locator(mticker.LogLocator(base=10, subs=(1, 1.5, 2, 3, 5, 7)))
+        ax.yaxis.set_minor_formatter(mticker.NullFormatter())
     if forward:
         ax.axvspan(0.3, 0.7, color='#fde68a', alpha=0.5); ax.text(0.32, C.max()/3, 'дифузійна\nємність', fontsize=9)
     plt.tight_layout(); plt.show()
@@ -406,8 +407,8 @@ ax.text(0.23, -Phi_M/2, f'$\\Phi_M$\n{Phi_M} еВ', ha='right', va='center', fon
 Ec, EF = -chi, -chi - EcEF
 ax.plot([0.6, 0.95], [Ec]*2, 'k', lw=2); ax.plot([0.6, 0.95], [Ec - Eg]*2, 'k', lw=2); ax.plot([0.6, 0.95], [EF]*2, 'r--', lw=1.5)
 ax.text(0.96, Ec, '$E_c$', va='center'); ax.text(0.96, Ec - Eg, '$E_v$', va='center'); ax.text(0.96, EF - 0.12, '$E_F$', color='r', va='center')
-ax.annotate('', xy=(0.7, 0), xytext=(0.7, Ec), arrowprops=dict(arrowstyle='<->')); ax.text(0.72, Ec/2, f'$\\chi$ = {chi} еВ', fontsize=9)
-ax.annotate('', xy=(0.87, 0), xytext=(0.87, EF), arrowprops=dict(arrowstyle='<->')); ax.text(0.85, EF/2 - 0.5, f'$\\Phi_S$\n{chi+EcEF:.2f}', ha='right', fontsize=9)
+ax.annotate('', xy=(0.68, 0), xytext=(0.68, Ec), arrowprops=dict(arrowstyle='<->')); ax.text(0.66, Ec/2, f'$\\chi$\n{chi} еВ', ha='right', va='center', fontsize=9)
+ax.annotate('', xy=(0.87, 0), xytext=(0.87, EF), arrowprops=dict(arrowstyle='<->')); ax.text(0.89, EF/2, f'$\\Phi_S$\n{chi+EcEF:.2f} еВ', ha='left', va='center', fontsize=9)
 ax.text(0.78, Ec - Eg - 0.5, 'n-Si, $N_d=10^{16}$', ha='center', fontsize=9)
 ax.set_xlim(0, 1.1); ax.set_ylim(-7, 0.6); ax.set_xticks([]); ax.set_ylabel('E, еВ'); ax.set_title('(а) До контакту'); ax.grid(False)
 # (б) і (в) після контакту: енергія від EF = 0
