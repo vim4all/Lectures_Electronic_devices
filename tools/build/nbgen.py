@@ -110,7 +110,7 @@ class NB:
 
     def setup(self, extra=''):
         self.md('''
-**Підключення бібліотек.** NumPy/Matplotlib — чисельні розрахунки та графіки, ipywidgets — інтерактивні повзунки, PySpice + ngspice — схемотехнічне моделювання, schemdraw — побудова схем з умовними позначеннями за ДСТУ/IEC. SPICE-моделі реальних приладів зібрано в теці `models/`. Цю комірку потрібно виконати першою.
+**Підключення бібліотек.** NumPy/Matplotlib — чисельні розрахунки та графіки, ipywidgets — інтерактивні повзунки, PySpice + ngspice — схемотехнічне моделювання, schemdraw — побудова схем з умовними позначеннями за ДСТУ/IEC. SPICE-моделі реальних приладів зібрано в теці `models/`. Цю комірку потрібно виконати першою; у Google Colab вона спершу встановлює ngspice і бібліотеки та завантажує моделі (близько хвилини).
 ''')
         self.code(SETUP + ('\n' + textwrap.dedent(extra).strip('\n') if extra else ''), hidden=False)
 
@@ -242,6 +242,8 @@ class NB:
 
 <p style="text-align: center;">{nav}</p>
 
+<p style="text-align: center;">📖 [Глосарій термінів](Глосарій.md) &nbsp;·&nbsp; [Зміст курсу](README.md)</p>
+
 *Конспект підготовлено: Пахалюк Богдан Петрович, НУ "Чернігівська політехніка"*
 ''')
 
@@ -327,6 +329,13 @@ def dump_images(path):
 
 
 SETUP = r'''
+import sys, os
+if 'google.colab' in sys.modules and not os.path.isdir('models'):   # Google Colab: ngspice, бібліотеки та SPICE-моделі (~1 хв)
+    !apt-get -qq install -y ngspice libngspice0-dev > /dev/null
+    %pip install -q PySpice==1.5 schemdraw==0.23
+    !git clone -q --depth 1 https://github.com/vim4all/Lectures_Electronic_devices.git /content/ElDev
+    %cd /content/ElDev
+
 import warnings
 warnings.filterwarnings('ignore', message='Unable to import Axes3D')
 import numpy as np

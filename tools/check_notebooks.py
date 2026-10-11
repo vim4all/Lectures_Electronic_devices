@@ -1,7 +1,7 @@
 """Check the lecture and lab notebooks.
 
 1. Every internal link ``[..](#anchor)`` points to an existing ``<a class="anchor" id="anchor">``,
-   no anchor id is used twice, and every link to another notebook ``[..](Лекція_NN_….ipynb)`` points to an existing file.
+   no anchor id is used twice, and every link to another notebook ``[..](Лекція_NN_….ipynb)`` or ``[..](Глосарій.md)`` points to an existing file.
 2. (unless --no-exec) every notebook executes top to bottom without errors,
    including errors swallowed by ipywidgets.interact and shown inside the widget.
 

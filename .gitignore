@@ -7,3 +7,7 @@ temp/
 *.doc
 tools/build/imgs/
 b3v33check.log
+
+# compiled PDFs are published as GitHub Release assets (tools/regenerate_pdfs.py)
+pdf/
+*.pdf

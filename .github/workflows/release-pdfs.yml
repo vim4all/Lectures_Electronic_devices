@@ -1,0 +1,39 @@
+name: Release PDFs
+
+# Push a version tag (git tag v1.0.0 && git push origin v1.0.0) to build the PDFs and attach them to a GitHub Release.
+# Run manually (Actions → Release PDFs → Run workflow) to only build them and download them as a workflow artifact.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pdfs:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install LaTeX and pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+            texlive-plain-generic texlive-lang-cyrillic pandoc fonts-dejavu
+      - name: Install Python packages
+        run: pip install nbconvert pypdf
+      - name: Export notebooks to PDF
+        run: python tools/regenerate_pdfs.py --out pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdfs
+          path: pdf/*.pdf
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: pdf/*.pdf
+          generate_release_notes: true

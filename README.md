@@ -7,6 +7,8 @@
 Національний університет «Чернігівська політехніка»
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices)
+[![PDF](https://img.shields.io/badge/PDF-завантажити-B31B1B?logo=adobeacrobatreader&logoColor=white)](https://github.com/vim4all/Lectures_Electronic_devices/releases/latest)
 [![Check notebooks](https://github.com/vim4all/Lectures_Electronic_devices/actions/workflows/notebooks.yml/badge.svg)](https://github.com/vim4all/Lectures_Electronic_devices/actions/workflows/notebooks.yml)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-notebooks-F37626?logo=jupyter&logoColor=white)
@@ -42,6 +44,24 @@
 - ⚙️ **Моделювання** реальних приладів (1N4148, 2N3904, BF245B, 2N7000, IRF540, IGBT…) у [PySpice](https://pyspice.fabrice-salvaire.fr/) + [ngspice](https://ngspice.sourceforge.io/); SPICE-моделі — у теці `models/`
 - 🧪 **Лабораторні роботи** виконуються SPICE-моделюванням із чисельною обробкою результатів (замість TINA)
 - ✅ **Питання для самоперевірки** та 📝 **задачі** для самостійного розв'язання в кожному розділі
+- 📖 **[Глосарій](Глосарій.md)**: українсько-англійський словник термінів і відповідність позначень у конспекті та в документації (datasheets)
+- 📥 **PDF-версії** лекцій і лабораторних робіт для читання без Jupyter і друку
+
+## 📥 Завантажити PDF
+
+Готові PDF-версії не зберігаються в репозиторії: вони публікуються як файли [релізу](../../releases/latest). Інтерактивні графіки в PDF показано для значень параметрів за замовчуванням (значення підписано під графіком).
+
+- 📘 [Усі лекції одним файлом (PDF)](../../releases/latest/download/Lectures_all.pdf)
+- 📖 [Глосарій (PDF)](../../releases/latest/download/Glossary.pdf)
+
+| Лекції | | | | Лабораторні роботи |
+|:---:|:---:|:---:|:---:|:---:|
+| [Лекція 1](../../releases/latest/download/Lecture_01.pdf) | [Лекція 2](../../releases/latest/download/Lecture_02.pdf) | [Лекція 3](../../releases/latest/download/Lecture_03.pdf) | [Лекція 4](../../releases/latest/download/Lecture_04.pdf) | [Лаб. 1](../../releases/latest/download/Lab_1.pdf) |
+| [Лекція 5](../../releases/latest/download/Lecture_05.pdf) | [Лекція 6](../../releases/latest/download/Lecture_06.pdf) | [Лекція 7](../../releases/latest/download/Lecture_07.pdf) | [Лекція 8](../../releases/latest/download/Lecture_08.pdf) | [Лаб. 2](../../releases/latest/download/Lab_2.pdf) |
+| [Лекція 9](../../releases/latest/download/Lecture_09.pdf) | [Лекція 10](../../releases/latest/download/Lecture_10.pdf) | [Лекція 11](../../releases/latest/download/Lecture_11.pdf) | [Лекція 12](../../releases/latest/download/Lecture_12.pdf) | [Лаб. 3](../../releases/latest/download/Lab_3.pdf) |
+| [Лекція 13](../../releases/latest/download/Lecture_13.pdf) |  |  |  | [Лаб. 4](../../releases/latest/download/Lab_4.pdf) |
+
+Посилання завжди ведуть на файли з останнього релізу.
 
 ## 🗺️ Карта курсу
 
@@ -68,49 +88,49 @@ flowchart LR
 
 ## 📚 Зміст
 
-> Натисніть назву теми, щоб переглянути її на GitHub, або ▶️, щоб запустити в Binder (без встановлення, у браузері).
+> Натисніть назву теми, щоб переглянути її на GitHub, або ▶️, щоб запустити в Binder чи Google Colab (без встановлення, у браузері).
 
 ### Частина 1 · фізичні основи та напівпровідникові діоди
 
-| № | Тема | Ключові питання | Binder |
-|:---:|---|---|:---:|
-| **01** | [Фізичні основи напівпровідників](Лекція_01_Фізичні_основи_напівпровідників.ipynb) | енергетичні зони, власні та домішкові напівпровідники, рівень Фермі, n(T), дрейф і дифузія, час життя | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_01_%D0%A4%D1%96%D0%B7%D0%B8%D1%87%D0%BD%D1%96_%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B8_%D0%BD%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D1%96%D0%B2.ipynb) |
-| **02** | [Електронно-дірковий (p-n) перехід](Лекція_02_Електронно-дірковий_перехід.ipynb) | утворення p-n переходу, контактна різниця потенціалів, ОПЗ, бар'єрна ємність, варикап, контакт метал–напівпровідник | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_02_%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%BE-%D0%B4%D1%96%D1%80%D0%BA%D0%BE%D0%B2%D0%B8%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D1%96%D0%B4.ipynb) |
-| **03** | [Вольт-амперна характеристика діода. Пробій і перехідні процеси](Лекція_03_Вольт-амперна_характеристика_діода.ipynb) | ідеалізована та реальна ВАХ, тунельний, лавинний і тепловий пробій, температурні властивості, перехідні процеси | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_03_%D0%92%D0%BE%D0%BB%D1%8C%D1%82-%D0%B0%D0%BC%D0%BF%D0%B5%D1%80%D0%BD%D0%B0_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B0_%D0%B4%D1%96%D0%BE%D0%B4%D0%B0.ipynb) |
-| **04** | [Напівпровідникові діоди та їх застосування](Лекція_04_Напівпровідникові_діоди_та_їх_застосування.ipynb) | випрямні діоди й випрямлячі, з'єднання діодів, діоди Шотки, стабілітрони, тунельні й обернені діоди | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_04_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8_%D1%82%D0%B0_%D1%97%D1%85_%D0%B7%D0%B0%D1%81%D1%82%D0%BE%D1%81%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F.ipynb) |
+| № | Тема | Ключові питання | Binder | Colab |
+|:---:|---|---|:---:|:---:|
+| **01** | [Фізичні основи напівпровідників](Лекція_01_Фізичні_основи_напівпровідників.ipynb) | енергетичні зони, власні та домішкові напівпровідники, рівень Фермі, n(T), дрейф і дифузія, час життя | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_01_%D0%A4%D1%96%D0%B7%D0%B8%D1%87%D0%BD%D1%96_%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B8_%D0%BD%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D1%96%D0%B2.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_01_%D0%A4%D1%96%D0%B7%D0%B8%D1%87%D0%BD%D1%96_%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B8_%D0%BD%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D1%96%D0%B2.ipynb) |
+| **02** | [Електронно-дірковий (p-n) перехід](Лекція_02_Електронно-дірковий_перехід.ipynb) | утворення p-n переходу, контактна різниця потенціалів, ОПЗ, бар'єрна ємність, варикап, контакт метал–напівпровідник | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_02_%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%BE-%D0%B4%D1%96%D1%80%D0%BA%D0%BE%D0%B2%D0%B8%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D1%96%D0%B4.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_02_%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%BE-%D0%B4%D1%96%D1%80%D0%BA%D0%BE%D0%B2%D0%B8%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D1%96%D0%B4.ipynb) |
+| **03** | [Вольт-амперна характеристика діода. Пробій і перехідні процеси](Лекція_03_Вольт-амперна_характеристика_діода.ipynb) | ідеалізована та реальна ВАХ, тунельний, лавинний і тепловий пробій, температурні властивості, перехідні процеси | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_03_%D0%92%D0%BE%D0%BB%D1%8C%D1%82-%D0%B0%D0%BC%D0%BF%D0%B5%D1%80%D0%BD%D0%B0_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B0_%D0%B4%D1%96%D0%BE%D0%B4%D0%B0.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_03_%D0%92%D0%BE%D0%BB%D1%8C%D1%82-%D0%B0%D0%BC%D0%BF%D0%B5%D1%80%D0%BD%D0%B0_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B0_%D0%B4%D1%96%D0%BE%D0%B4%D0%B0.ipynb) |
+| **04** | [Напівпровідникові діоди та їх застосування](Лекція_04_Напівпровідникові_діоди_та_їх_застосування.ipynb) | випрямні діоди й випрямлячі, з'єднання діодів, діоди Шотки, стабілітрони, тунельні й обернені діоди | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_04_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8_%D1%82%D0%B0_%D1%97%D1%85_%D0%B7%D0%B0%D1%81%D1%82%D0%BE%D1%81%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_04_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8_%D1%82%D0%B0_%D1%97%D1%85_%D0%B7%D0%B0%D1%81%D1%82%D0%BE%D1%81%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F.ipynb) |
 
 ### Частина 2 · біполярні транзистори
 
-| № | Тема | Ключові питання | Binder |
-|:---:|---|---|:---:|
-| **05** | [Біполярний транзистор: будова, принцип дії, режими](Лекція_05_Біполярний_транзистор_принцип_дії.ipynb) | будова, режими роботи, інжекція й перенесення носіїв, модель Еберса–Молла, схеми ввімкнення | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_05_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B4%D1%96%D1%97.ipynb) |
-| **06** | [Статичні характеристики та параметри біполярного транзистора](Лекція_06_Статичні_характеристики_біполярного_транзистора.ipynb) | вхідні й вихідні характеристики СЕ і СБ, ефект Ерлі, h-параметри, β(I, T), пробій, ОБР | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_06_%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%BD%D1%96_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8_%D0%B1%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B0.ipynb) |
-| **07** | [Біполярний транзистор у підсилювальному та ключовому режимах](Лекція_07_Біполярний_транзистор_у_динамічному_режимі.ipynb) | гібридна П-подібна модель, частотні властивості, підсилювальний каскад, ключ і час розсмоктування | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_07_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D1%83_%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D1%87%D0%BD%D0%BE%D0%BC%D1%83_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D1%96.ipynb) |
+| № | Тема | Ключові питання | Binder | Colab |
+|:---:|---|---|:---:|:---:|
+| **05** | [Біполярний транзистор: будова, принцип дії, режими](Лекція_05_Біполярний_транзистор_принцип_дії.ipynb) | будова, режими роботи, інжекція й перенесення носіїв, модель Еберса–Молла, схеми ввімкнення | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_05_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B4%D1%96%D1%97.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_05_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B4%D1%96%D1%97.ipynb) |
+| **06** | [Статичні характеристики та параметри біполярного транзистора](Лекція_06_Статичні_характеристики_біполярного_транзистора.ipynb) | вхідні й вихідні характеристики СЕ і СБ, ефект Ерлі, h-параметри, β(I, T), пробій, ОБР | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_06_%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%BD%D1%96_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8_%D0%B1%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B0.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_06_%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%BD%D1%96_%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8_%D0%B1%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B0.ipynb) |
+| **07** | [Біполярний транзистор у підсилювальному та ключовому режимах](Лекція_07_Біполярний_транзистор_у_динамічному_режимі.ipynb) | гібридна П-подібна модель, частотні властивості, підсилювальний каскад, ключ і час розсмоктування | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_07_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D1%83_%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D1%87%D0%BD%D0%BE%D0%BC%D1%83_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D1%96.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_07_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B8%D0%B9_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80_%D1%83_%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D1%87%D0%BD%D0%BE%D0%BC%D1%83_%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D1%96.ipynb) |
 
 ### Частина 3 · польові транзистори та силові ключі
 
-| № | Тема | Ключові питання | Binder |
-|:---:|---|---|:---:|
-| **08** | [Польові транзистори з керуючим p-n переходом](Лекція_08_Польові_транзистори_з_керуючим_pn_переходом.ipynb) | будова і принцип дії JFET, вихідні та передавальна характеристики, автозміщення, керований опір | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_08_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B7_%D0%BA%D0%B5%D1%80%D1%83%D1%8E%D1%87%D0%B8%D0%BC_pn_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4%D0%BE%D0%BC.ipynb) |
-| **09** | [МДН-транзистори (MOSFET)](Лекція_09_МДН-транзистори.ipynb) | МДН-структура, порогова напруга, C-V характеристика, типи МДН, підпороговий режим, КМОН-інвертор | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_09_%D0%9C%D0%94%D0%9D-%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
-| **10** | [Динамічні властивості польових транзисторів. Потужні МДН-транзистори та IGBT](Лекція_10_Динаміка_ПТ_потужні_МДН_та_IGBT.ipynb) | ємності МДН, заряд затвора й плато Міллера, VDMOS, IGBT, порівняння силових ключів | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_10_%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D0%BA%D0%B0_%D0%9F%D0%A2_%D0%BF%D0%BE%D1%82%D1%83%D0%B6%D0%BD%D1%96_%D0%9C%D0%94%D0%9D_%D1%82%D0%B0_IGBT.ipynb) |
+| № | Тема | Ключові питання | Binder | Colab |
+|:---:|---|---|:---:|:---:|
+| **08** | [Польові транзистори з керуючим p-n переходом](Лекція_08_Польові_транзистори_з_керуючим_pn_переходом.ipynb) | будова і принцип дії JFET, вихідні та передавальна характеристики, автозміщення, керований опір | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_08_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B7_%D0%BA%D0%B5%D1%80%D1%83%D1%8E%D1%87%D0%B8%D0%BC_pn_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4%D0%BE%D0%BC.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_08_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B7_%D0%BA%D0%B5%D1%80%D1%83%D1%8E%D1%87%D0%B8%D0%BC_pn_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4%D0%BE%D0%BC.ipynb) |
+| **09** | [МДН-транзистори (MOSFET)](Лекція_09_МДН-транзистори.ipynb) | МДН-структура, порогова напруга, C-V характеристика, типи МДН, підпороговий режим, КМОН-інвертор | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_09_%D0%9C%D0%94%D0%9D-%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_09_%D0%9C%D0%94%D0%9D-%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
+| **10** | [Динамічні властивості польових транзисторів. Потужні МДН-транзистори та IGBT](Лекція_10_Динаміка_ПТ_потужні_МДН_та_IGBT.ipynb) | ємності МДН, заряд затвора й плато Міллера, VDMOS, IGBT, порівняння силових ключів | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_10_%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D0%BA%D0%B0_%D0%9F%D0%A2_%D0%BF%D0%BE%D1%82%D1%83%D0%B6%D0%BD%D1%96_%D0%9C%D0%94%D0%9D_%D1%82%D0%B0_IGBT.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_10_%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D0%BA%D0%B0_%D0%9F%D0%A2_%D0%BF%D0%BE%D1%82%D1%83%D0%B6%D0%BD%D1%96_%D0%9C%D0%94%D0%9D_%D1%82%D0%B0_IGBT.ipynb) |
 
 ### Частина 4 · тиристори, оптоелектроніка, інші прилади
 
-| № | Тема | Ключові питання | Binder |
-|:---:|---|---|:---:|
-| **11** | [Тиристорні прилади](Лекція_11_Тиристорні_прилади.ipynb) | p-n-p-n структура, диністор, тиристор, симістор, керовані випрямлячі, ввімкнення та вимкнення | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_11_%D0%A2%D0%B8%D1%80%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) |
-| **12** | [Оптоелектронні прилади](Лекція_12_Оптоелектронні_прилади.ipynb) | фоторезистори, фотодіоди, сонячні елементи, світлодіоди, оптрони | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_12_%D0%9E%D0%BF%D1%82%D0%BE%D0%B5%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) |
-| **13** | [Прилади із зарядовим зв'язком, терморезистори та варістори](Лекція_13_ПЗЗ_терморезистори_варістори.ipynb) | прилади із зарядовим зв'язком, терморезистори (NTC, PTC), варістори і захист від перенапруг | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_13_%D0%9F%D0%97%D0%97_%D1%82%D0%B5%D1%80%D0%BC%D0%BE%D1%80%D0%B5%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B2%D0%B0%D1%80%D1%96%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
+| № | Тема | Ключові питання | Binder | Colab |
+|:---:|---|---|:---:|:---:|
+| **11** | [Тиристорні прилади](Лекція_11_Тиристорні_прилади.ipynb) | p-n-p-n структура, диністор, тиристор, симістор, керовані випрямлячі, ввімкнення та вимкнення | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_11_%D0%A2%D0%B8%D1%80%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_11_%D0%A2%D0%B8%D1%80%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) |
+| **12** | [Оптоелектронні прилади](Лекція_12_Оптоелектронні_прилади.ipynb) | фоторезистори, фотодіоди, сонячні елементи, світлодіоди, оптрони | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_12_%D0%9E%D0%BF%D1%82%D0%BE%D0%B5%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_12_%D0%9E%D0%BF%D1%82%D0%BE%D0%B5%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%96_%D0%BF%D1%80%D0%B8%D0%BB%D0%B0%D0%B4%D0%B8.ipynb) |
+| **13** | [Прилади із зарядовим зв'язком, терморезистори та варістори](Лекція_13_ПЗЗ_терморезистори_варістори.ipynb) | прилади із зарядовим зв'язком, терморезистори (NTC, PTC), варістори і захист від перенапруг | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_13_%D0%9F%D0%97%D0%97_%D1%82%D0%B5%D1%80%D0%BC%D0%BE%D1%80%D0%B5%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B2%D0%B0%D1%80%D1%96%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B5%D0%BA%D1%86%D1%96%D1%8F_13_%D0%9F%D0%97%D0%97_%D1%82%D0%B5%D1%80%D0%BC%D0%BE%D1%80%D0%B5%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8_%D0%B2%D0%B0%D1%80%D1%96%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
 
 ### 🧪 Лабораторні роботи
 
-| № | Робота | Що моделюється | Binder |
-|:---:|---|---|:---:|
-| **1** | [Дослідження напівпровідникових діодів](Лб1_Напівпровідникові_діоди.ipynb) | схема живлення світлодіода, опір бази та контактна різниця потенціалів за прямою гілкою ВАХ | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B11_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8.ipynb) |
-| **2** | [Дослідження напівпровідникових стабілітронів](Лб2_Напівпровідникові_стабілітрони.ipynb) | диференціальний опір, параметричний стабілізатор, вплив температури | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B12_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D1%81%D1%82%D0%B0%D0%B1%D1%96%D0%BB%D1%96%D1%82%D1%80%D0%BE%D0%BD%D0%B8.ipynb) |
-| **3** | [Дослідження біполярних транзисторів](Лб3_Біполярні_транзистори.ipynb) | вхідні й вихідні характеристики СЕ і СБ, h-параметри, фізичні параметри | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B13_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
-| **4** | [Дослідження польових транзисторів](Лб4_Польові_транзистори.ipynb) | характеристики передачі й вихідні, крутизна, вихідна провідність, опір каналу | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B14_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
+| № | Робота | Що моделюється | Binder | Colab |
+|:---:|---|---|:---:|:---:|
+| **1** | [Дослідження напівпровідникових діодів](Лб1_Напівпровідникові_діоди.ipynb) | схема живлення світлодіода, опір бази та контактна різниця потенціалів за прямою гілкою ВАХ | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B11_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B11_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D0%B4%D1%96%D0%BE%D0%B4%D0%B8.ipynb) |
+| **2** | [Дослідження напівпровідникових стабілітронів](Лб2_Напівпровідникові_стабілітрони.ipynb) | диференціальний опір, параметричний стабілізатор, вплив температури | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B12_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D1%81%D1%82%D0%B0%D0%B1%D1%96%D0%BB%D1%96%D1%82%D1%80%D0%BE%D0%BD%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B12_%D0%9D%D0%B0%D0%BF%D1%96%D0%B2%D0%BF%D1%80%D0%BE%D0%B2%D1%96%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%96_%D1%81%D1%82%D0%B0%D0%B1%D1%96%D0%BB%D1%96%D1%82%D1%80%D0%BE%D0%BD%D0%B8.ipynb) |
+| **3** | [Дослідження біполярних транзисторів](Лб3_Біполярні_транзистори.ipynb) | вхідні й вихідні характеристики СЕ і СБ, h-параметри, фізичні параметри | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B13_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B13_%D0%91%D1%96%D0%BF%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
+| **4** | [Дослідження польових транзисторів](Лб4_Польові_транзистори.ipynb) | характеристики передачі й вихідні, крутизна, вихідна провідність, опір каналу | [▶️](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD?labpath=%D0%9B%D0%B14_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) | [▶️](https://colab.research.google.com/github/vim4all/Lectures_Electronic_devices/blob/main/%D0%9B%D0%B14_%D0%9F%D0%BE%D0%BB%D1%8C%D0%BE%D0%B2%D1%96_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8.ipynb) |
 
 На початку кожної лабораторної роботи вкажіть свій варіант (`VARIANT`) або номер бригади (`BRIGADE`) і внесіть дані з документації в комірки, позначені `TODO`, — усі розрахунки перерахуються автоматично.
 
@@ -157,6 +177,18 @@ flowchart LR
 
 | № | Питання | Де шукати |
 |---|---|---|
+| 25 | Прилади із зарядовим зв'язком | Лекція 13: «Прилади із зарядовим зв'язком (ПЗЗ)» |
+| 26 | Диністор | Лекція 11: «Чотиришарова p-n-p-n структура», «Диністор» |
+| 27 | Тиристор з керуючим електродом | Лекція 11: «Тиристор з керуючим електродом» |
+| 28 | Симістори | Лекція 11: «Симетричні тиристори (симістори)» |
+| 29 | Способи ввімкнення та вимкнення тиристорів, перехідні процеси | Лекція 11: «Увімкнення та вимкнення тиристорів. Перехідні процеси» |
+| 30 | IGBT: конструкція, характеристики, переваги та недоліки | Лекція 10: «IGBT — біполярний транзистор з ізольованим затвором», «Порівняння силових ключів» |
+| 31 | Фоторезистори | Лекція 12: «Фоторезистори» |
+| 32 | Фотодіоди, різновиди фотодіодів | Лекція 12: «Фотодіоди» |
+| 33 | Оптрони | Лекція 12: «Оптрони» |
+| 34 | Терморезистори | Лекція 13: «Терморезистори» |
+| 35 | Варістори | Лекція 13: «Варістори» |
+| 36 | Світлодіоди | Лекція 12: «Світлодіоди»; Лаб. 1 |
 
 </details>
 
@@ -175,6 +207,8 @@ flowchart LR
 ## 🚀 Запуск
 
 **Онлайн:** натисніть [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vim4all/Lectures_Electronic_devices/HEAD) — середовище з усіма бібліотеками та ngspice збереться автоматично (перший запуск триває кілька хвилин).
+
+**Google Colab:** натисніть ▶️ у колонці Colab. Перша комірка зошита сама встановить ngspice, PySpice і schemdraw та завантажить SPICE-моделі (близько хвилини); потрібен обліковий запис Google.
 
 **Локально** (Linux / WSL):
 
@@ -215,17 +249,34 @@ python tools/check_notebooks.py --no-exec  # лише посилання (шви
 python tools/check_notebooks.py Лб3        # лише зошити, у назві яких є «Лб3»
 ```
 
+PDF-версії для релізу генеруються з уже виконаних зошитів (повторне виконання не потрібне); потрібні `xelatex` і `pandoc`:
+
+```bash
+sudo apt install texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-plain-generic texlive-lang-cyrillic pandoc fonts-dejavu
+pip install nbconvert pypdf
+python tools/regenerate_pdfs.py            # усі PDF -> pdf/
+python tools/regenerate_pdfs.py Лекція_04  # лише вибрані
+```
+
+Щоб опублікувати новий реліз, достатньо створити тег версії — GitHub Actions збере всі PDF і прикріпить їх до релізу:
+
+```bash
+git tag v1.0.0 && git push origin v1.0.0
+```
+
 Структура репозиторію:
 
 ```
 Лекція_NN_*.ipynb          лекції 1–13
 Лб*_*.ipynb                лабораторні роботи 1–4
 models/                    SPICE-моделі приладів (діоди, БТ, JFET, МДН, IGBT)
+Глосарій.md                українсько-англійський словник термінів
 Teacher.jpg                фото для заголовків
 requirements.txt, apt.txt  залежності Python і системні пакети (також для Binder)
 tools/build/               сценарії генерації лекцій
 tools/check_notebooks.py   перевірка посилань і виконання зошитів
-.github/workflows/         автоматична перевірка в GitHub Actions
+tools/regenerate_pdfs.py   експорт зошитів у PDF
+.github/workflows/         перевірка зошитів і збирання PDF для релізу в GitHub Actions
 ```
 
 </details>
