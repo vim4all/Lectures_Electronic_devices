@@ -52,7 +52,7 @@ def execute(path, inplace):
         except CellTimeoutError:
             continue
         except CellExecutionError as e:
-            return [str(e).splitlines()[-1] if str(e) else "cell execution error"]
+            return [" | ".join(str(e).strip().splitlines()[-3:]) if str(e) else "cell execution error"]
     else:
         return ["execution kept timing out"]
 
@@ -92,6 +92,8 @@ def main():
             problems += execute(path, args.inplace)
         for p in problems:
             print(f"FAIL {name}: {p}")
+            if os.environ.get("GITHUB_ACTIONS"):   # shown on the run page (and in the API) without opening the log
+                print(f"::error title={name}::{p}".replace("%", "%25").replace("\r", "%0D"), flush=True)
         if problems:
             failed = True
         else:
