@@ -1,10 +1,13 @@
 name: Release PDFs
 
 # Push a version tag (git tag v1.0.0 && git push origin v1.0.0) to build the PDFs and attach them to a GitHub Release.
-# Run manually (Actions → Release PDFs → Run workflow) to only build them and download them as a workflow artifact.
+# A change of the exporter on main, or a manual run (Actions → Release PDFs → Run workflow), only builds them
+# (download them as the workflow artifact).
 on:
   push:
     tags: ["v*"]
+    branches: [main]
+    paths: ["tools/regenerate_pdfs.py", ".github/workflows/release-pdfs.yml"]
   workflow_dispatch:
 
 permissions:
@@ -21,12 +24,19 @@ jobs:
       - name: Install LaTeX and pandoc
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-fonts-recommended \
-            texlive-plain-generic texlive-lang-cyrillic pandoc fonts-dejavu
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+            texlive-plain-generic texlive-lang-cyrillic lmodern pandoc fonts-dejavu
       - name: Install Python packages
         run: pip install nbconvert pypdf
       - name: Export notebooks to PDF
-        run: python tools/regenerate_pdfs.py --out pdf
+        run: |
+          set -o pipefail
+          python tools/regenerate_pdfs.py --out pdf 2>&1 | tee pdf.log
+      - name: Show the error as an annotation
+        if: failure()
+        run: |
+          grep -v -i "warning\|normalize" pdf.log | tail -40 > tail.log || true
+          echo "::error title=PDF export failed::$(sed ':a;N;$!ba;s/%/%25/g;s/\r/%0D/g;s/\n/%0A/g' tail.log)"
       - uses: actions/upload-artifact@v4
         with:
           name: pdfs
