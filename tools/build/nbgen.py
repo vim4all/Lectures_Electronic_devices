@@ -79,7 +79,6 @@ class NB:
 <p style="text-align: center;"> <b>Викладач:</b> </p>
 <p style="text-align: center;"> Доктор філософії</p>
 <p style="text-align: center;"> Пахалюк Богдан Петрович</p>
-<img src="./Teacher.jpg" alt="" width="110" >
 <hr/>
 <p style="text-align: center; font-size: 0.9em;">Лекція {int(self.num)} з {N_LECT}</p>
 </div>

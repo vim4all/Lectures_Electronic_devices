@@ -174,7 +174,6 @@ def title_page(src, kind_label):
 \begin{{itemize}}
 {items}\end{{itemize}}
 \end{{minipage}}\par\vfill
-\includegraphics[width=2.6cm]{{Teacher.jpg}}\par\vspace{{6pt}}
 Викладач: доктор філософії {AUTHOR}\par\vspace{{4pt}}
 {UNIVERSITY}\par\vspace{{4pt}}
 {{\small {latex_escape(of.group(1)) if of else ''}}}
